@@ -2,10 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { handleCheckout } = require('./checkout');
+const { mountAdmin } = require('./admin');
 
 const app = express();
 
 app.use(cors());
+
+// ადმინ-პანელი (gltrade.ge/admin/) — ფოტოების გამო დიდი მოთხოვნები, ამიტომ ზოგად json-მდე
+mountAdmin(app, express);
+
 app.use(express.json({ limit: '1mb' }));
 
 // Render-ისა და შემოწმებისთვის: სერვერი ცოცხალია?
